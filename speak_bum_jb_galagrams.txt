@@ -246,44 +246,51 @@ if(~User) {
     
     #Play
     if(touch(24)) {
-        URL = array(
-        Url,
-        "http://air.radiorecord.ru:8102/bighits_320",
-        "http://lorfm.ice.infomaniak.ch/lorfm-128.mp3",
-        "http://online.radiorecord.ru:8102/hbass_320",
-        "http://online.radiorecord.ru:8102/club_128",
-        "http://air.radiorecord.ru:8101/rr_320",
-        "http://d.zaix.ru/dJax.mp3",
-        "http://d.zaix.ru/egvU.mp3",
-        "http://zaycevfm.net/mp3/russian-music/Little_Big_-_Im_OK_.mp3",
-        "http://d.zaix.ru/e3Ir.mp3",
-        "http://ep128.streamr.ru",
-        "http://d.zaix.ru/d3cQ.mp3",
-        "http://d.zaix.ru/e3yL.mp3",
-        "http://d.zaix.ru/eio4.mp3",
-        "http://d.zaix.ru/8d4R.mp3",  
-        "https://download.lalamus.pro/cache/1/fd8/9009_456239994.mp3?filename=Mitchell%20Doxon-Platinum%20Maniacs.mp3",
-        "http://d.zaix.ru/eU62.mp3",
-        "http://d.zaix.ru/eU6T.mp3",   
-        "http://dl2.mp3party.net/online/8476081.mp3",
-        "http://dl2.mp3party.net/online/110238.mp3",
-        "http://dl2.mp3party.net/download/8984720",
-        "http://d.zaix.ru/eXPu.mp3",
-        "http://air.radiorecord.ru:8102/club_320",
-        "-"
-        )
-        soundURLload("1",URL[URLNum,string],1,1,entity())
-        soundURLvolume("1",Volume)
-        Url_out=URL[URLNum,string]
-        Play_out = 1
-        EGP:egpText(33,"urel play :"+ URL[URLNum,string],EGP:egpPos(32)+vec2(0,0))
+        if(URLNum > 1){
+            URL = array(
+            Url,
+            "http://air.radiorecord.ru:8102/bighits_320",
+            "http://lorfm.ice.infomaniak.ch/lorfm-128.mp3",
+            "http://online.radiorecord.ru:8102/hbass_320",
+            "http://online.radiorecord.ru:8102/club_128",
+            "http://air.radiorecord.ru:8101/rr_320",
+            "http://d.zaix.ru/dJax.mp3",
+            "http://d.zaix.ru/egvU.mp3",
+            "http://zaycevfm.net/mp3/russian-music/Little_Big_-_Im_OK_.mp3",
+            "http://d.zaix.ru/e3Ir.mp3",
+            "http://ep128.streamr.ru",
+            "http://d.zaix.ru/d3cQ.mp3",
+            "http://d.zaix.ru/e3yL.mp3",
+            "http://d.zaix.ru/eio4.mp3",
+            "http://d.zaix.ru/8d4R.mp3",  
+            "https://download.lalamus.pro/cache/1/fd8/9009_456239994.mp3?filename=Mitchell%20Doxon-Platinum%20Maniacs.mp3",
+            "http://d.zaix.ru/eU62.mp3",
+            "http://d.zaix.ru/eU6T.mp3",   
+            "http://dl2.mp3party.net/online/8476081.mp3",
+            "http://dl2.mp3party.net/online/110238.mp3",
+            "http://dl2.mp3party.net/download/8984720",
+            "http://d.zaix.ru/eXPu.mp3",
+            "http://air.radiorecord.ru:8102/club_320",
+            "-"
+            )
+            soundURLload("1",URL[URLNum,string],1,1,entity())
+            soundURLvolume("1",Volume)
+            Url_out=URL[URLNum,string]
+            Play_out = 1
+            EGP:egpText(33,"urel play :"+ URL[URLNum,string],EGP:egpPos(32)+vec2(0,0))
+            }
         
     }
+        
+    
     
     #Pause
     if(touch(26)) {
-        soundURLdelete("1")
-        Play_out = 0
+        if(URLNum > 1){
+            soundURLdelete("1")
+            Play_out = 0
+            }
+    
     }
 }
 if(Play == 1){
