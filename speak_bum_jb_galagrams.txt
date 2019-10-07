@@ -9,6 +9,8 @@
 # abnova tyt https://yadi.sk/d/oYiGfGhuSdiKCA
 
 
+# repazitori gitboom https://github.com/maxsspeaker/gitboom
+
 #by maxsspeaker
 interval(100)
 Light=vec(random(255),random(255),random(255))
