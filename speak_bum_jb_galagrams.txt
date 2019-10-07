@@ -40,7 +40,7 @@ if(first() | dupefinished()) {
     "http://dl2.mp3party.net/online/110238.mp3",
     "http://dl2.mp3party.net/download/8984720",
     "http://air.radiorecord.ru:8102/club_320",
-    (Url),
+    Url,
     "-"
     )
     
