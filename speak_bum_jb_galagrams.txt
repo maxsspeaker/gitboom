@@ -19,7 +19,6 @@ if(first() | dupefinished()) {
     Visualizer = 0 "0 = Off , 1 = On"
     
     URL = array(
-    Url,
     "http://air.radiorecord.ru:8102/bighits_320",
     "http://lorfm.ice.infomaniak.ch/lorfm-128.mp3",
     "http://online.radiorecord.ru:8102/hbass_320",
@@ -42,11 +41,12 @@ if(first() | dupefinished()) {
     "http://dl2.mp3party.net/download/8984720",
     "http://d.zaix.ru/eXPu.mp3",
     "http://air.radiorecord.ru:8102/club_320",
+    Url,
     "-"
     )
     
     StationName = array(
-    "wiremod input beta",
+    "wiremod input",
     "Big Hits 320",
     "Lor FM 128",
     "Hard Bass 320",
@@ -68,7 +68,7 @@ if(first() | dupefinished()) {
     "TWRK - Helicopter",
     "MIKE WILIAMS - KONNICHIWA",
     "Harlem Shake Baauer",
-    "Radiorecord.ru - EDM",
+    "Radiorecord.ru - EDM",  
     "-"
     )
     
@@ -151,7 +151,7 @@ if(first() | dupefinished()) {
     EGP:egpText(27,"STOP",EGP:egpPos(26)+vec2(-22,-10))
     
 
-    EGP:egpText(31,"Beta 1.8.2 blastwire",EGP:egpPos(30)+vec2(349,490))
+    EGP:egpText(31,"Beta 1.8.9 blastwire inp",EGP:egpPos(30)+vec2(349,490))
     
     EGP:egpText(33,"urlplay:"+ URL[URLNum,string],EGP:egpPos(32)+vec2(0,0))
     
@@ -288,15 +288,22 @@ if(~User) {
 }
 if(Play == 1){
     if(R == 0){
-        EGP:egpSetText(2,"wiremod input")
-        soundURLload("1",Url,1,1,entity())
-        soundURLvolume("1",Volume)
-        Url_out=Url
-        EGP:egpText(33,"urel play :"+ Url,EGP:egpPos(32)+vec2(0,0))
-        R=1
-        Play_out = 1
-        Y=0
-        }
+    
+        if(URLNum == 1){
+            soundURLload("1",Url,1,1,entity())
+            soundURLvolume("1",Volume)
+            Url_out=Url
+            EGP:egpText(33,"urel play :"+ Url,EGP:egpPos(32)+vec2(0,0))
+            R=1
+            Play_out = 1
+            Y=0
+ }  
+} 
+            
+    
+        
+
+            
     
     
     
