@@ -1,0 +1,312 @@
+@name speak bum JB galagrams
+@inputs EGP:wirelink User:entity EGP2:wirelink  Url:string
+@persist I E:entity  URLNum [Max URL StationName]:array Visualizer Num Volume 
+@model models/bull/various/speaker.mdl
+@outputs Light:vector Glow Urel:string Play Stop Volume1
+@persist RR GG BB
+
+
+# abnova tyt https://yadi.sk/d/oYiGfGhuSdiKCA
+
+
+#by maxsspeaker
+interval(100)
+Light=vec(random(255),random(255),random(255))
+#########################################################################################################
+if(first() | dupefinished()) {
+    Visualizer = 0 "0 = Off , 1 = On"
+    
+    URL = array(
+    "http://air.radiorecord.ru:8102/bighits_320",
+    "http://lorfm.ice.infomaniak.ch/lorfm-128.mp3",
+    "http://online.radiorecord.ru:8102/hbass_320",
+    "http://online.radiorecord.ru:8102/club_128",
+    "http://air.radiorecord.ru:8101/rr_320",
+    "http://d.zaix.ru/dJax.mp3",
+    "http://d.zaix.ru/egvU.mp3",
+    "http://zaycevfm.net/mp3/russian-music/Little_Big_-_Im_OK_.mp3",
+    "http://d.zaix.ru/e3Ir.mp3",
+    "http://ep128.streamr.ru",
+    "http://d.zaix.ru/d3cQ.mp3",
+    "http://d.zaix.ru/e3yL.mp3",
+    "http://d.zaix.ru/eio4.mp3",
+    "http://d.zaix.ru/8d4R.mp3",  
+    "https://download.lalamus.pro/cache/1/fd8/9009_456239994.mp3?filename=Mitchell%20Doxon-Platinum%20Maniacs.mp3",
+    "http://d.zaix.ru/eU62.mp3",
+    "http://d.zaix.ru/eU6T.mp3",   
+    "http://dl2.mp3party.net/online/8476081.mp3",
+    "http://dl2.mp3party.net/online/110238.mp3",
+    "http://dl2.mp3party.net/download/8984720",
+    "http://air.radiorecord.ru:8102/club_320",
+    (Url),
+    "-"
+    )
+    
+    StationName = array(
+    "Big Hits 320",
+    "Lor FM 128",
+    "Hard Bass 320",
+    "Club 128",
+    "RR 320",
+    "TEST",
+    "hz",
+    "Little_Big_-_Im_OK",
+    "Valence - Infinite [NCS Release]",
+    "EWROPA +",
+    "k-391 deep blue",
+    "Sub Urban - Cradles [NCS Release]",
+    "3232",
+    "LITTLE BIG FARAD",
+    "Mitchell Doxon-Platinum Maniacs",
+    "Dutty Moonshine & Kid Kasino - Everybody",
+    "Back from the Dead",
+    "Ewn&Whogaux – Start That Fire",
+    "TWRK - Helicopter",
+    "MIKE WILIAMS - KONNICHIWA",
+    "Radiorecord.ru - EDM",
+    "wiremod input",
+    "-"
+    )
+    
+    URLNum = 0
+    Volume = 100
+    
+    soundURLdelete("")
+
+    EGP2:egpClear()
+    
+    
+    EGP:egpClear()
+    
+    EGP:egpBox(1,vec2(256),vec2(512))
+    EGP:egpColor(1,vec(60))
+    
+    
+    EGP:egpText(15,"speak bum JB Galagrams",vec2(256,10))
+    EGP:egpAlign(15,1)
+    EGP:egpSize(15,25)
+    
+    EGP:egpText(16,"______________",vec2(256,18))
+    EGP:egpAlign(16,1)
+    
+    EGP:egpText(17,"by maxsspeaker",vec2(470,0))
+    EGP:egpAlign(17,1)
+    EGP:egpSize(17,13)
+
+    EGP:egpText(2,"nothing",vec2(256,90))
+    EGP:egpAlign(2,1)
+    EGP:egpText(3,"VOLUME: 100",vec2(25,120))
+    
+    EGP:egpRoundedBox(4,vec2(256-100,100),vec2(40))
+    EGP:egpColor(4,vec(50))
+    EGP:egpRadius(4,5)
+    EGP:egpText(5,"<",EGP:egpPos(4)+vec2(-7,-10))
+    
+    EGP:egpRoundedBox(6,vec2(256+100,100),vec2(40))
+    EGP:egpColor(6,vec(50))
+    EGP:egpRadius(6,5)
+    EGP:egpText(7,">",EGP:egpPos(6)+vec2(-7,-10))
+    
+    EGP:egpRoundedBox(8,vec2(470,40),vec2(40))
+    EGP:egpColor(8,vec(200,0,0))
+    EGP:egpRadius(8,5)
+    EGP:egpText(9,"Off",EGP:egpPos(8)+vec2(0,-10))
+    EGP:egpAlign(9,1)
+
+    EGP:egpText(10,"Visualizer:",EGP:egpPos(9)+vec2(-65,0))
+    EGP:egpAlign(10,1)
+    
+    EGP:egpRoundedBox(11,vec2(50,40),vec2(40))
+    EGP:egpColor(11,vec(50))
+    EGP:egpRadius(11,5)
+    EGP:egpText(12,"-",EGP:egpPos(11)+vec2(-3,-10))
+    
+    EGP:egpRoundedBox(13,vec2(100,40),vec2(40))
+    EGP:egpColor(13,vec(50))
+    EGP:egpRadius(13,5)
+    EGP:egpText(14,"+",EGP:egpPos(13)+vec2(-5,-10))
+    
+    EGP:egpRoundedBox(20,vec2(50,90),vec2(40))
+    EGP:egpColor(20,vec(50))
+    EGP:egpRadius(20,5)
+    EGP:egpText(21,"-10",EGP:egpPos(20)+vec2(-15,-10))
+    
+    EGP:egpRoundedBox(22,vec2(100,90),vec2(40))
+    EGP:egpColor(22,vec(50))
+    EGP:egpRadius(22,5)
+    EGP:egpText(23,"+10",EGP:egpPos(22)+vec2(-17,-10))
+    
+    EGP:egpRoundedBox(24,vec2(200,470),vec2(80, 50))
+    EGP:egpColor(24,vec(50))
+    EGP:egpRadius(24,5)
+    EGP:egpText(25,"PLAY",EGP:egpPos(24)+vec2(-17,-10))
+    
+    EGP:egpRoundedBox(26,vec2(300,470),vec2(80, 50))
+    EGP:egpColor(26,vec(50))
+    EGP:egpRadius(26,5)
+    EGP:egpText(27,"STOP",EGP:egpPos(26)+vec2(-22,-10))
+    
+
+    EGP:egpText(31,"Beta 1.6.3 saublasurl",EGP:egpPos(30)+vec2(349,490))
+    
+    EGP:egpText(33,"urlplay:"+ URL[URLNum,string],EGP:egpPos(32)+vec2(0,0))
+    
+
+
+}
+
+runOnChat(1)
+
+interval(100)
+E = entity()
+
+function number touch(Index){
+return inrange(EGP:egpCursor(User),EGP:egpPos(Index)-EGP:egpSize(Index)/2,EGP:egpPos(Index)+EGP:egpSize(Index)/2)
+}
+
+#########################################################################################################
+if(~User) {
+    #Moins
+    if(touch(4)) {
+        EGP:egpColor(4,vec(70))
+        
+        URLNum = URLNum - 1
+        URLNum = URLNum%URL:count()
+        
+        EGP:egpSetText(2,StationName[URLNum,string])
+    }
+    else
+    {
+        EGP:egpColor(4,vec(50))
+    }
+    
+    #Plus
+    if(touch(6)) {
+        EGP:egpColor(6,vec(70))
+        
+        URLNum = URLNum + 1
+        URLNum = URLNum%URL:count()
+        
+        EGP:egpSetText(2,StationName[URLNum,string])
+    }
+    else
+    {
+        EGP:egpColor(6,vec(50))
+    }
+    
+    #Visualizer On-Off
+    if(touch(8)) {
+        Visualizer = Visualizer + 1
+        Visualizer = Visualizer%2
+    }
+    
+    #Volume -
+    if(touch(11)) {
+        Volume = Volume - 0.05
+        Volume = clamp(Volume,0,1)
+        
+        EGP:egpSetText(3,"VOLUME: "+round(Volume*100))
+        soundURLvolume("1",Volume)
+        Volume1 = Volume
+    }
+    
+    #Volume +
+    if(touch(13)) {
+        Volume = Volume + 0.05
+        Volume = clamp(Volume,0,1)
+        
+        EGP:egpSetText(3,"VOLUME: "+round(Volume*100))
+        soundURLvolume("1",Volume)
+        Volume1 = Volume
+    }
+    
+    #Volume -
+    if(touch(20)) {
+        Volume = Volume - 0.1
+        Volume = clamp(Volume,0,1)
+        
+        EGP:egpSetText(3,"VOLUME: "+round(Volume*100))
+        soundURLvolume("1",Volume)
+        Volume1 = Volume
+    }
+    
+    #Volume +
+    if(touch(22)) {
+        Volume = Volume + 0.1
+        Volume = clamp(Volume,0,1)
+        
+        EGP:egpSetText(3,"VOLUME: "+round(Volume*100))
+        soundURLvolume("1",Volume)
+        Volume1 = Volume
+    }
+    
+    #Play
+    if(touch(24)) {
+        soundURLload("1",URL[URLNum,string],1,1,entity())
+        soundURLvolume("1",Volume)
+        Urel = URL[URLNum,string]
+        Play = 1
+        EGP:egpText(33,"urel play :"+ URL[URLNum,string],EGP:egpPos(32)+vec2(0,0))
+        
+    }
+    
+    #Pause
+    if(touch(26)) {
+        soundURLdelete("1")
+        Play = 0
+    }
+}
+
+if(URLNum < URL:count()) {
+    EGP:egpSetText(2,StationName[URLNum,string])
+}
+
+if(URLNum == 0) {
+    EGP:egpSetText(2,"nothing")
+}
+
+#########################################################################################################
+soundURLplay(1)
+
+if(Visualizer) {
+    EGP:egpColor(8,vec(0,200,0))
+    EGP:egpSetText(9,"On")
+    
+    Num = 46
+    
+    FFT = E:soundFFT("1")
+
+    for(I=1,Num) {
+        Color = hsv2rgb(I%360,1,1)
+    
+        EGP2:egpBox(50+I,vec2(-5+I*11,510-FFT[I,number]/2),vec2(10,5+FFT[I,number]))
+        EGP2:egpColor(50+I,Color)
+    
+    
+        if(FFT[I,number] >= Max[I,number]) {
+            Max[I,number] = FFT[I,number]
+        }
+        else
+        {
+            if(Max[I,number] >= FFT[I,number]) {
+                Max[I,number] = Max[I,number] - 5
+            }
+        }
+    
+        EGP2:egpLine(100+I,vec2(-10+I*11,505-Max[I,number]),vec2(0+I*11,505-Max[I,number]))
+    }
+}
+else
+{
+    EGP:egpColor(8,vec(200,0,0))
+    EGP:egpSetText(9,"Off")
+    
+    for(I=1,Num) {
+        EGP2:egpRemove(50+I)
+        EGP2:egpRemove(100+I)
+    }
+}
+
+#by maxsspeaker
+#by maxsspeaker
+#by maxsspeaker
