@@ -1,15 +1,15 @@
 @name speak bum JB galagrams
-@inputs EGP:wirelink User:entity EGP2:wirelink  Url:string
-@persist I E:entity  URLNum [Max URL StationName]:array Visualizer Num Volume 
+@inputs EGP:wirelink User:entity EGP2:wirelink  Url:string Play Stop
+@persist I E:entity  URLNum [Max URL StationName]:array Visualizer Num Volume  R
 @model models/bull/various/speaker.mdl
-@outputs Light:vector Glow Urel:string Play Stop Volume1
+@outputs Light:vector Glow Url_out:string Play_out Stop Volume1
 @persist RR GG BB
 
 
 # abnova tyt https://yadi.sk/d/oYiGfGhuSdiKCA
 
-
 # repazitori gitboom https://github.com/maxsspeaker/gitboom
+
 
 #by maxsspeaker
 interval(100)
@@ -19,6 +19,7 @@ if(first() | dupefinished()) {
     Visualizer = 0 "0 = Off , 1 = On"
     
     URL = array(
+    Url,
     "http://air.radiorecord.ru:8102/bighits_320",
     "http://lorfm.ice.infomaniak.ch/lorfm-128.mp3",
     "http://online.radiorecord.ru:8102/hbass_320",
@@ -39,12 +40,13 @@ if(first() | dupefinished()) {
     "http://dl2.mp3party.net/online/8476081.mp3",
     "http://dl2.mp3party.net/online/110238.mp3",
     "http://dl2.mp3party.net/download/8984720",
+    "http://d.zaix.ru/eXPu.mp3",
     "http://air.radiorecord.ru:8102/club_320",
-    Url,
     "-"
     )
     
     StationName = array(
+    "wiremod input beta",
     "Big Hits 320",
     "Lor FM 128",
     "Hard Bass 320",
@@ -65,8 +67,8 @@ if(first() | dupefinished()) {
     "Ewn&Whogaux – Start That Fire",
     "TWRK - Helicopter",
     "MIKE WILIAMS - KONNICHIWA",
+    "Harlem Shake Baauer",
     "Radiorecord.ru - EDM",
-    "wiremod input",
     "-"
     )
     
@@ -149,7 +151,7 @@ if(first() | dupefinished()) {
     EGP:egpText(27,"STOP",EGP:egpPos(26)+vec2(-22,-10))
     
 
-    EGP:egpText(31,"Beta 1.6.3 saublasurl",EGP:egpPos(30)+vec2(349,490))
+    EGP:egpText(31,"Beta 1.8.2 blastwire",EGP:egpPos(30)+vec2(349,490))
     
     EGP:egpText(33,"urlplay:"+ URL[URLNum,string],EGP:egpPos(32)+vec2(0,0))
     
@@ -244,10 +246,36 @@ if(~User) {
     
     #Play
     if(touch(24)) {
+        URL = array(
+        Url,
+        "http://air.radiorecord.ru:8102/bighits_320",
+        "http://lorfm.ice.infomaniak.ch/lorfm-128.mp3",
+        "http://online.radiorecord.ru:8102/hbass_320",
+        "http://online.radiorecord.ru:8102/club_128",
+        "http://air.radiorecord.ru:8101/rr_320",
+        "http://d.zaix.ru/dJax.mp3",
+        "http://d.zaix.ru/egvU.mp3",
+        "http://zaycevfm.net/mp3/russian-music/Little_Big_-_Im_OK_.mp3",
+        "http://d.zaix.ru/e3Ir.mp3",
+        "http://ep128.streamr.ru",
+        "http://d.zaix.ru/d3cQ.mp3",
+        "http://d.zaix.ru/e3yL.mp3",
+        "http://d.zaix.ru/eio4.mp3",
+        "http://d.zaix.ru/8d4R.mp3",  
+        "https://download.lalamus.pro/cache/1/fd8/9009_456239994.mp3?filename=Mitchell%20Doxon-Platinum%20Maniacs.mp3",
+        "http://d.zaix.ru/eU62.mp3",
+        "http://d.zaix.ru/eU6T.mp3",   
+        "http://dl2.mp3party.net/online/8476081.mp3",
+        "http://dl2.mp3party.net/online/110238.mp3",
+        "http://dl2.mp3party.net/download/8984720",
+        "http://d.zaix.ru/eXPu.mp3",
+        "http://air.radiorecord.ru:8102/club_320",
+        "-"
+        )
         soundURLload("1",URL[URLNum,string],1,1,entity())
         soundURLvolume("1",Volume)
-        Urel = URL[URLNum,string]
-        Play = 1
+        Url_out=URL[URLNum,string]
+        Play_out = 1
         EGP:egpText(33,"urel play :"+ URL[URLNum,string],EGP:egpPos(32)+vec2(0,0))
         
     }
@@ -255,10 +283,33 @@ if(~User) {
     #Pause
     if(touch(26)) {
         soundURLdelete("1")
-        Play = 0
+        Play_out = 0
     }
 }
+if(Play == 1){
+    if(R == 0){
+        EGP:egpSetText(2,"wiremod input")
+        soundURLload("1",Url,1,1,entity())
+        soundURLvolume("1",Volume)
+        Url_out=Url
+        EGP:egpText(33,"urel play :"+ Url,EGP:egpPos(32)+vec2(0,0))
+        R=1
+        Play_out = 1
+        Y=0
+        }
+    
+    
+    
+}
 
+if(Play == 0){ 
+    if(URLNum == 1) {
+        R=0
+        soundURLdelete("1")
+        Play_out = 0  
+        }
+    
+}
 if(URLNum < URL:count()) {
     EGP:egpSetText(2,StationName[URLNum,string])
 }
