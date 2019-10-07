@@ -1,0 +1,62 @@
+@name Admin krilya
+@inputs 
+@outputs 
+@persist [Ch]:string [Own]:entity Si T Sin Col:vector Tra:vector
+@trigger 
+
+if(first()){
+    Own = owner()
+    Ch = "chest"
+    Col = vec(0,255,0)
+    Tra = vec(0,255,0)
+    #Own:setMaterial("debug/debugdrawflat")
+    function vector entity:aniPos(Att:string){
+        return This:attachmentPos(Att)
+    }
+    function angle entity:aniAng(Att:string){
+        return This:attachmentAng(Att)
+    }
+    
+    for(I=1,5){
+        Si = 25*sin(180*(I/5))
+        holoCreate(I)
+        holoPos(I,Own:aniPos(Ch)+vec(-20,I*7,-20+Si):rotate(Own:aniAng(Ch)))
+        holoScale(I,vec(0.2))
+        holoParentAttachment(I,Own,Ch)
+        holoColor(2,vec(0,0,266))
+        holoEntity(I):setTrails(20,0,0.5,"trails/smoke",Col,255)
+        holoColor(1,vec(0,0,255))
+        holoAlpha(I,0)
+    }
+    
+    for(I=6,10){
+        Si = 25*sin(180*((I-5)/5))
+        holoCreate(I)
+        holoPos(I,Own:aniPos(Ch)+vec(-20,-(I-5)*7,-20+Si):rotate(Own:aniAng(Ch)))
+        holoScale(I,vec(0.2))
+        holoParentAttachment(I,Own,Ch)
+        holoColor(4,vec(0,0,255))
+        holoEntity(I):setTrails(20,0,0.5,"trails/smoke",Tra,255)
+        holoAlpha(I,0)
+    }
+}
+interval(20)
+T+=90
+if(T>=360){T=0}
+Sin = 30*sin(T)
+for(I=1,5){
+    Si = 25*sin(180*(I/5))
+    holoPos(I,Own:aniPos(Ch)+vec(-20,I*7,-20+Si+Sin):rotate(Own:aniAng(Ch)))
+}
+
+
+for(I=6,10){
+        Si = 25*sin(180*((I-5)/5))
+        holoPos(I,Own:aniPos(Ch)+vec(-20,-(I-5)*7,-20+Si+Sin):rotate(Own:aniAng(Ch)))
+    }
+Own = owner()
+Sp = Own:keyJump()
+W = Own:keyForward()
+if(Own:keyJump()){
+    Own:setVel(vec(0,0,50)+vec(10*W,0,0):rotate(Own:eyeAngles()))
+}
