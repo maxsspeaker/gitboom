@@ -3,7 +3,7 @@
 @outputs 
 @persist [Ch]:string [Own]:entity Si T Sin Col:vector Tra:vector
 @trigger 
-
+# чип не мой
 if(first()){
     Own = owner()
     Ch = "chest"
