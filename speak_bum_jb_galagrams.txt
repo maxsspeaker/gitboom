@@ -19,6 +19,7 @@ if(first() | dupefinished()) {
     Visualizer = 0 "0 = Off , 1 = On"
     
     URL = array(
+    Url,
     "http://air.radiorecord.ru:8102/bighits_320",
     "http://lorfm.ice.infomaniak.ch/lorfm-128.mp3",
     "http://online.radiorecord.ru:8102/hbass_320",
@@ -40,8 +41,9 @@ if(first() | dupefinished()) {
     "http://dl2.mp3party.net/online/110238.mp3",
     "http://dl2.mp3party.net/download/8984720",
     "http://d.zaix.ru/eXPu.mp3",
-    "http://air.radiorecord.ru:8102/club_320",
-    Url,
+    "https://s3.xn--41a.wiki/0/3677_e907b7daed0ff8ddb601ecfebeca1f6a.mp3",
+    "http://air.radiorecord.ru:8102/club_320", 
+    "http://d.zaix.ru/f3YG.mp3",
     "-"
     )
     
@@ -49,7 +51,7 @@ if(first() | dupefinished()) {
     "wiremod input",
     "Big Hits 320",
     "Lor FM 128",
-    "Hard Bass 320",
+    "Hard Bass 320", 
     "Club 128",
     "RR 320",
     "TEST",
@@ -67,8 +69,10 @@ if(first() | dupefinished()) {
     "Ewn&Whogaux – Start That Fire",
     "TWRK - Helicopter",
     "MIKE WILIAMS - KONNICHIWA",
-    "Harlem Shake Baauer",
-    "Radiorecord.ru - EDM",  
+    "Harlem Shake Baauer", 
+    "DJ SNAKE, ALUNAGORGE - YOU KNOW YOU LIKE IT",
+    "Radiorecord.ru - EDM",
+    "Peyruis - Swing", 
     "-"
     )
     
@@ -104,12 +108,12 @@ if(first() | dupefinished()) {
     EGP:egpRoundedBox(4,vec2(256-100,100),vec2(40))
     EGP:egpColor(4,vec(50))
     EGP:egpRadius(4,5)
-    EGP:egpText(5,"<",EGP:egpPos(4)+vec2(-7,-10))
+    EGP:egpText(5,"◄",EGP:egpPos(4)+vec2(-7,-10))
     
     EGP:egpRoundedBox(6,vec2(256+100,100),vec2(40))
     EGP:egpColor(6,vec(50))
     EGP:egpRadius(6,5)
-    EGP:egpText(7,">",EGP:egpPos(6)+vec2(-7,-10))
+    EGP:egpText(7,"►",EGP:egpPos(6)+vec2(-7,-10))
     
     EGP:egpRoundedBox(8,vec2(470,40),vec2(40))
     EGP:egpColor(8,vec(200,0,0))
@@ -143,15 +147,15 @@ if(first() | dupefinished()) {
     EGP:egpRoundedBox(24,vec2(200,470),vec2(80, 50))
     EGP:egpColor(24,vec(50))
     EGP:egpRadius(24,5)
-    EGP:egpText(25,"PLAY",EGP:egpPos(24)+vec2(-17,-10))
+    EGP:egpText(25,"►",EGP:egpPos(24)+vec2(-17,-10)) 
     
     EGP:egpRoundedBox(26,vec2(300,470),vec2(80, 50))
     EGP:egpColor(26,vec(50))
     EGP:egpRadius(26,5)
-    EGP:egpText(27,"STOP",EGP:egpPos(26)+vec2(-22,-10))
+    EGP:egpText(27,"▐▐",EGP:egpPos(26)+vec2(-22,-10))
     
 
-    EGP:egpText(31,"Beta 1.8.9 blastwire inp",EGP:egpPos(30)+vec2(349,490))
+    EGP:egpText(31,"Beta 1.9.5 blasBUMuncod",EGP:egpPos(30)+vec2(320,490))
     
     EGP:egpText(33,"urlplay:"+ URL[URLNum,string],EGP:egpPos(32)+vec2(0,0))
     
@@ -218,8 +222,8 @@ if(~User) {
     if(touch(13)) {
         Volume = Volume + 0.05
         Volume = clamp(Volume,0,1)
-        
-        EGP:egpSetText(3,"VOLUME: "+round(Volume*100))
+         
+        EGP:egpSetText(3,"VOLUME: "+round(Volume*100))   
         soundURLvolume("1",Volume)
         Volume1 = Volume
     }
@@ -247,32 +251,6 @@ if(~User) {
     #Play
     if(touch(24)) {
         if(URLNum > 1){
-            URL = array(
-            Url,
-            "http://air.radiorecord.ru:8102/bighits_320",
-            "http://lorfm.ice.infomaniak.ch/lorfm-128.mp3",
-            "http://online.radiorecord.ru:8102/hbass_320",
-            "http://online.radiorecord.ru:8102/club_128",
-            "http://air.radiorecord.ru:8101/rr_320",
-            "http://d.zaix.ru/dJax.mp3",
-            "http://d.zaix.ru/egvU.mp3",
-            "http://zaycevfm.net/mp3/russian-music/Little_Big_-_Im_OK_.mp3",
-            "http://d.zaix.ru/e3Ir.mp3",
-            "http://ep128.streamr.ru",
-            "http://d.zaix.ru/d3cQ.mp3",
-            "http://d.zaix.ru/e3yL.mp3",
-            "http://d.zaix.ru/eio4.mp3",
-            "http://d.zaix.ru/8d4R.mp3",  
-            "https://download.lalamus.pro/cache/1/fd8/9009_456239994.mp3?filename=Mitchell%20Doxon-Platinum%20Maniacs.mp3",
-            "http://d.zaix.ru/eU62.mp3",
-            "http://d.zaix.ru/eU6T.mp3",   
-            "http://dl2.mp3party.net/online/8476081.mp3",
-            "http://dl2.mp3party.net/online/110238.mp3",
-            "http://dl2.mp3party.net/download/8984720",
-            "http://d.zaix.ru/eXPu.mp3",
-            "http://air.radiorecord.ru:8102/club_320",
-            "-"
-            )
             soundURLload("1",URL[URLNum,string],1,1,entity())
             soundURLvolume("1",Volume)
             Url_out=URL[URLNum,string]
