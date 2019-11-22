@@ -1,8 +1,8 @@
-@name speak bum JB galagrams
-@inputs EGP:wirelink User:entity EGP2:wirelink  Url:string Play Stop
-@persist I E:entity  URLNum [Max URL StationName]:array Visualizer Num Volume  R
-@model models/bull/various/speaker.mdl
-@outputs Light:vector Glow Url_out:string Play_out Stop Volume1
+@name speak bum JB galagrams eg2
+@inputs EGP:wirelink User:entity EGP2:wirelink  Url:string Play Stop ON Pause
+@persist I E:entity  URLNum [Max URL StationName]:array Visualizer Num Volume  R 
+@model models/props_lab/reciever01b.mdl
+@outputs Light:vector Glow Url_out:string Play_out Stop Volume ON_out Pause_out
 @persist RR GG BB
 
 
@@ -12,8 +12,24 @@
 
 
 #by maxsspeaker
-interval(100)
-Light=vec(random(255),random(255),random(255))
+
+if(ON==1){
+    interval(100)
+    Light=vec(random(255),random(255),random(255))
+    ON_out=1
+}
+else{
+    Light=vec(0,0,0)
+    ON_out=0
+}
+
+if(Pause_out==1){
+    soundURLpause("1")
+    
+}
+else{
+    soundURLplay("1")
+}
 #########################################################################################################
 if(first() | dupefinished()) {
     Visualizer = 0 "0 = Off , 1 = On"
@@ -44,6 +60,15 @@ if(first() | dupefinished()) {
     "https://s3.xn--41a.wiki/0/3677_e907b7daed0ff8ddb601ecfebeca1f6a.mp3",
     "http://air.radiorecord.ru:8102/club_320", 
     "http://d.zaix.ru/f3YG.mp3",
+    "http://dl1.mp3party.net/download/4333272",
+    "http://d.zaix.ru/fsmL.mp3",
+    "https://hitmo.org/get/music/20190916/muzlome_Parah_Dice_-_Hot_66597435.mp3",
+    "http://d.zaix.ru/doEC.mp3",
+    "https://s2.xn--41a.wiki/0/3355_51427b0d1eae098af8d204ababb4b77a.mp3",
+    "http://d.zaix.ru/fCjK.mp3",
+    "http://d.zaix.ru/b8L2.mp3", 
+    "http://d.zaix.ru/fM7D.mp3",
+    "https://uzimusic.ru/mp3/3444832/Cartoon_-_On_amp_On_Feat_Daniel_Levi_Ncs_Release(uzimusic.ru).mp3",
     "-"
     )
     
@@ -66,13 +91,24 @@ if(first() | dupefinished()) {
     "Mitchell Doxon-Platinum Maniacs",
     "Dutty Moonshine & Kid Kasino - Everybody",
     "Back from the Dead",
-    "Ewn&Whogaux – Start That Fire",
+    "Ewn&Whogaux  Start That Fire",
     "TWRK - Helicopter",
     "MIKE WILIAMS - KONNICHIWA",
     "Harlem Shake Baauer", 
     "DJ SNAKE, ALUNAGORGE - YOU KNOW YOU LIKE IT",
     "Radiorecord.ru - EDM",
-    "Peyruis - Swing", 
+    "Peyruis - Swing",  
+    "Matbow 
+ Catch Up",
+    "Slider & Magnit - MorzeUp",
+    "muzlome_Parah_Dice_-_Hot",
+    "TA PTALA", 
+    "One Kiss Calvin Harris, Dua Lipa", 
+    "Bommer x Crowell - Yasuo",
+    "Doctor P - Going Gorillas", 
+    "MBB - Takeoff",
+    "CARTOON - ON & ON",
+    
     "-"
     )
     
@@ -100,17 +136,18 @@ if(first() | dupefinished()) {
     EGP:egpText(17,"by maxsspeaker",vec2(470,0))
     EGP:egpAlign(17,1)
     EGP:egpSize(17,13)
-
+    
+    EGP2:egpText(2,"nothing",vec2(100,90))
     EGP:egpText(2,"nothing",vec2(256,90))
     EGP:egpAlign(2,1)
     EGP:egpText(3,"VOLUME: 100",vec2(25,120))
     
-    EGP:egpRoundedBox(4,vec2(256-100,100),vec2(40))
+    EGP:egpRoundedBox(4,vec2(256-150,470),vec2(50))
     EGP:egpColor(4,vec(50))
     EGP:egpRadius(4,5)
     EGP:egpText(5,"◄",EGP:egpPos(4)+vec2(-7,-10))
     
-    EGP:egpRoundedBox(6,vec2(256+100,100),vec2(40))
+    EGP:egpRoundedBox(6,vec2(256+140,470),vec2(50))
     EGP:egpColor(6,vec(50))
     EGP:egpRadius(6,5)
     EGP:egpText(7,"►",EGP:egpPos(6)+vec2(-7,-10))
@@ -144,22 +181,26 @@ if(first() | dupefinished()) {
     EGP:egpRadius(22,5)
     EGP:egpText(23,"+10",EGP:egpPos(22)+vec2(-17,-10))
     
-    EGP:egpRoundedBox(24,vec2(200,470),vec2(80, 50))
+    EGP:egpRoundedBox(24,vec2(230,470),vec2( 50))
     EGP:egpColor(24,vec(50))
     EGP:egpRadius(24,5)
-    EGP:egpText(25,"►",EGP:egpPos(24)+vec2(-17,-10)) 
+    EGP:egpText(25,"►",EGP:egpPos(24)+vec2(-10,-10)) 
     
-    EGP:egpRoundedBox(26,vec2(300,470),vec2(80, 50))
+    EGP:egpRoundedBox(90,vec2(170,470),vec2(50))
+    EGP:egpColor(90,vec(50))
+    EGP:egpRadius(90,5)
+    EGP:egpText(92,"▐▐",EGP:egpPos(90)+vec2(-10,-10)) 
+    
+    EGP:egpRoundedBox(26,vec2(300,470),vec2(60, 50))
     EGP:egpColor(26,vec(50))
     EGP:egpRadius(26,5)
-    EGP:egpText(27,"▐▐",EGP:egpPos(26)+vec2(-22,-10))
+    EGP:egpText(27,"▉",EGP:egpPos(26)+vec2(-12,-10))
     
 
-    EGP:egpText(31,"Beta 1.9.5 blasBUMuncod",EGP:egpPos(30)+vec2(320,490))
+    EGP:egpText(31,"Beta 2.3.6 blasBMpausep",EGP:egpPos(30)+vec2(320,490))
     
     EGP:egpText(33,"urlplay:"+ URL[URLNum,string],EGP:egpPos(32)+vec2(0,0))
     
-
 
 }
 
@@ -181,7 +222,7 @@ if(~User) {
         URLNum = URLNum - 1
         URLNum = URLNum%URL:count()
         
-        EGP:egpSetText(2,StationName[URLNum,string])
+        EGP:egpSetText(2,StationName[URLNum,string])  
     }
     else
     {
@@ -214,8 +255,6 @@ if(~User) {
         Volume = clamp(Volume,0,1)
         
         EGP:egpSetText(3,"VOLUME: "+round(Volume*100))
-        soundURLvolume("1",Volume)
-        Volume1 = Volume
     }
     
     #Volume +
@@ -224,8 +263,6 @@ if(~User) {
         Volume = clamp(Volume,0,1)
          
         EGP:egpSetText(3,"VOLUME: "+round(Volume*100))   
-        soundURLvolume("1",Volume)
-        Volume1 = Volume
     }
     
     #Volume -
@@ -234,8 +271,6 @@ if(~User) {
         Volume = clamp(Volume,0,1)
         
         EGP:egpSetText(3,"VOLUME: "+round(Volume*100))
-        soundURLvolume("1",Volume)
-        Volume1 = Volume
     }
     
     #Volume +
@@ -244,8 +279,6 @@ if(~User) {
         Volume = clamp(Volume,0,1)
         
         EGP:egpSetText(3,"VOLUME: "+round(Volume*100))
-        soundURLvolume("1",Volume)
-        Volume1 = Volume
     }
     
     #Play
@@ -256,8 +289,21 @@ if(~User) {
             Url_out=URL[URLNum,string]
             Play_out = 1
             EGP:egpText(33,"urel play :"+ URL[URLNum,string],EGP:egpPos(32)+vec2(0,0))
+            EGP2:egpSetText(2,StationName[URLNum,string])
+            setName("speak bum JB galagrams eg2 play now: " + StationName[URLNum,string])
             }
         
+    }
+    if(touch(90)) {
+        if(URLNum > 1){
+            Pause_out=Pause_out+1
+            if(Pause_out==2){
+                Pause_out=0
+            }
+            
+            
+            
+        }
     }
         
     
@@ -267,6 +313,7 @@ if(~User) {
         if(URLNum > 1){
             soundURLdelete("1")
             Play_out = 0
+            EGP:egpSetText(2," ")
             }
     
     }
@@ -276,28 +323,31 @@ if(Play == 1){
     
         if(URLNum == 1){
             soundURLload("1",Url,1,1,entity())
-            soundURLvolume("1",Volume)
             Url_out=Url
             EGP:egpText(33,"urel play :"+ Url,EGP:egpPos(32)+vec2(0,0))
+            EGP2:egpSetText(2,Url_out)
             R=1
             Play_out = 1
             Y=0
  }  
 } 
             
-    
-        
-
-            
-    
-    
-    
+       
 }
+if(URLNum == 1){
+    Pause=Pause+1
+    if(Pause==2){
+        Pause=0
+    }
+}
+    
 
 if(Play == 0){ 
     if(URLNum == 1) {
         R=0
+        EGP2:egpSetText(2,StationName[URLNum,string])
         soundURLdelete("1")
+        EGP:egpSetText(2," ")
         Play_out = 0  
         }
     
@@ -311,8 +361,7 @@ if(URLNum == 0) {
 }
 
 #########################################################################################################
-soundURLplay(1)
-
+soundURLvolume("1",0)
 if(Visualizer) {
     EGP:egpColor(8,vec(0,200,0))
     EGP:egpSetText(9,"On")
