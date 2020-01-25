@@ -21,14 +21,14 @@ if options.db == true and options.nogpu == true then
     db = true
 end
 if #args == 0 then
-    io.write("Usage: nbs_parse <filename>")
+    io.write("использование: nbs <filename>")
     return
 end
 
 local filename = shell.resolve(args[1])
 
 if not fs.exists(filename) then
-    io.stderr:write("No such file!")
+    io.stderr:write("нет фаила")
     return 1
 end
 
@@ -274,7 +274,7 @@ soundReset()
 -- fb stands for frame bit
 local fb = frame / 32
 
-title("Currently playing:")
+title("Сейчас играю:")
 -- Hey, we have currenttick from before; Why don't we use it for good?
 for i=0, currenttick do
     -- Unused is a channel number from which start unused channels
@@ -315,7 +315,7 @@ for i=0, currenttick do
     -- And blast all the data we set to the sound card, as promised
     sound.delay(frame)
     sound.process()
-    status("нота" .. i .. " of " .. song.length)
+    status("нота " .. i .. " of " .. song.length)
     if db then
         print(serialization.serialize(ticks[i]))
     end
