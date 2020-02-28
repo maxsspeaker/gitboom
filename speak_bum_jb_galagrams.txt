@@ -1,6 +1,6 @@
 @name speak bum JB galagrams eg2
-@inputs EGP:wirelink User:entity EGP2:wirelink  Url:string Play Stop ON Pause
-@persist I E:entity  URLNum [Max URL StationName]:array Visualizer Num Volume  R 
+@inputs EGP:wirelink User:entity EGP2:wirelink  Url:string Play Stop ON Pause W:wirelink Urlkeypad
+@persist I E:entity  URLNum [Max URL StationName]:array Visualizer Num Volume  R  EI  [Players OP]:table
 @model models/props_lab/reciever01b.mdl
 @outputs Light:vector Glow Url_out:string Play_out Stop Volume ON_out Pause_out
 @persist RR GG BB
@@ -12,6 +12,58 @@
 
 
 #by maxsspeaker
+
+######################################################################################################
+
+if (->W&(first()|dupefinished()|changed(->W))){
+    W:egpClear()
+    timer("scan",10)
+}
+if (clk("scan")){
+    findByClass("player")
+    Players=findToTable()
+    if (Players:count()!=OP:count()){
+        I=0
+        EI=0
+        timer("egp",10)
+    }
+    OP=Players
+    timer("scan",10)
+}
+if (clk("egp")&(I<Players:count())){
+    if (clk("egp")&!I){W:egpClear()}
+    I++
+    P=Players[I,entity]
+    
+    EI++
+    W:egp3DTracker(EI,vec(0,0,0))
+    W:egpParent(EI,P)
+    if(Players[I,entity]:isAdmin()){
+        EI++
+        W:egpBox(EI,vec2(0,0),vec2(10,10))
+        W:egpColor(EI,vec4(255,0,0,100))
+        W:egpPos(EI,W:egpPos(EI-1))
+        W:egpParent(EI,EI-1)
+    }else{
+        EI++
+        W:egpBox(EI,vec2(0,0),vec2(10,10))
+        W:egpColor(EI,vec4(100,255,100,100))
+        W:egpPos(EI,W:egpPos(EI-1))
+        W:egpParent(EI,EI-1)
+    }
+    EI++
+    W:egpText(EI,Players[I,entity]:name(),vec2())
+    W:egpParent(EI,EI-2)
+    timer("egp",5)
+}
+
+
+
+######################################################################################################
+
+
+
+
 
 if(ON==1){
     interval(100)
@@ -36,6 +88,7 @@ if(first() | dupefinished()) {
     
     URL = array(
     Url,
+    Urlkeypad,
     "http://air.radiorecord.ru:8102/bighits_320",
     "http://lorfm.ice.infomaniak.ch/lorfm-128.mp3",
     "http://online.radiorecord.ru:8102/hbass_320",
@@ -69,11 +122,16 @@ if(first() | dupefinished()) {
     "http://d.zaix.ru/b8L2.mp3", 
     "http://d.zaix.ru/fM7D.mp3",
     "https://uzimusic.ru/mp3/3444832/Cartoon_-_On_amp_On_Feat_Daniel_Levi_Ncs_Release(uzimusic.ru).mp3",
+    "http://dl2.mp3party.net/online/4446498.mp3",
+    "https://www.dropbox.com/s/2r084xwa87e5iwq/Geoxor%20-%20You%20I.mp3?dl=1",
+    "http://d.zaix.ru/gugk.mp3", 
+    "http://d.zaix.ru/gUHS.mp3",
     "-"
     )
     
     StationName = array(
     "wiremod input",
+    "keypord input",
     "Big Hits 320",
     "Lor FM 128",
     "Hard Bass 320", 
@@ -108,6 +166,10 @@ if(first() | dupefinished()) {
     "Doctor P - Going Gorillas", 
     "MBB - Takeoff",
     "CARTOON - ON & ON",
+    "Anikdote  Turn It Up NCS Release",
+    "geoxor you & i",
+    "Geyban",
+    "RUDE-Eternal-Youth",
     
     "-"
     )
@@ -208,6 +270,32 @@ runOnChat(1)
 
 interval(100)
 E = entity()
+
+
+#noDuplications()
+
+Cursor = EGP:egpCursor(User)
+
+function number button(Num){
+    return inrange(Cursor,EGP:egpPos(Num),EGP:egpPos(Num) + EGP:egpSize(Num)) #Function for buttons.
+}
+
+
+if(first()){
+    O = owner()
+    E = entity()
+}
+
+if(first() | duped()){
+    
+       
+}
+
+EGP:egpBox(999,vec2(50,50),vec2(30,30)) # Cursor
+EGP:egpCursor(O)
+EGP:egpParentToCursor(999)
+EGP:egpMaterial(999, "vgui/cursors/arrow") #vgui/accept_button #vgui/cursors/arrow
+
 
 function number touch(Index){
 return inrange(EGP:egpCursor(User),EGP:egpPos(Index)-EGP:egpSize(Index)/2,EGP:egpPos(Index)+EGP:egpSize(Index)/2)
