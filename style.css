@@ -1,0 +1,96 @@
+/* ЗОСРАНЕЦ НЕ ТРОГАЙ ОНО НЕ ТВОЁ! */
+body{
+	/*background-color: MediumSeaGreen;*/
+	background-image: url(https://github.com/maxsspeaker/gitboom/raw/master/bg.jpg);
+	background-size: cover;
+}
+p{
+	color: red;
+	font-size: 2em;
+	font-family: Comic Sans MS;
+}
+.main{
+	width: calc(100vw - 15%);
+	height: calc(100vh - 100px);
+	background-color: #474747;
+	margin: auto;
+	padding: 10px;
+	text-align: center;
+}
+.main a{
+	text-decoration: none;
+	outline: none;
+	display: block;
+	transition: .3s ease-in-out;
+}
+.logo{
+	color: #D5B45B;
+	font-family: 'Playfair Display',serif;
+	font-size: 2.5em;
+	padding: 20px 0;
+}
+nav{
+	display:  table;
+	margin: 0 auto;
+}
+nav ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.topmenu > li{
+	width: :25%;
+	float: left;
+	position: relative;
+	font-family: 'Open Sans',sans-serif;
+
+}
+
+.topmenu > li > a{
+	text-transform:  uppercase;
+	font-size: 14px;
+	font-weight: bold;
+	color:#c4c4c4;
+	padding: 15px 30px;
+}
+.topmenu li a:hover{
+	color:#D5B45B;
+}
+.submenu-link:after{
+	font-family: "FontAwesome";
+	color: inherit;
+	margin-left:10px;
+	content: "\f107";
+}
+.submenu{
+	background:  #c4c4c4
+	position: absolute;
+	left:  0
+	top:100%;
+	z-index: 5;
+	width:  180px;
+	opacity: 0;
+	transform: scaleY(0);
+	transform-origin: 0 0;
+	transition: .5s ease-in-out
+}
+.submenu a{
+	color:white;
+	text-align: left;
+	padding: 12px 15px;
+	font-size: 12px;
+	border-bottom: 1px solid rgba(100,100,100,.1);
+
+}
+.submenu li:last-child a{
+	border-bottom:none;
+}
+.topmenu > li:hover .submenu{
+	opacity: 1;
+	transform: scaleY(1);
+}
+.topmenu:after{
+	content: "";
+	display: table;
+	clear: both;
+}
